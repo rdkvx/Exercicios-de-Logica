@@ -1,0 +1,140 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int elemento[50];
+int controle;
+
+void Empilhar(){
+	system("cls");
+	printf(">>>EMPILHAR<<<\n");
+	printf("\n");
+	printf("Inserindo o valor: ");
+	scanf("%d", &elemento[controle]);
+	//printf("%d\n", elemento[controle]);
+	controle++;
+	system("pause");
+}
+
+void Desempilhar(){
+	system("cls");
+	printf(">>>DESEMPILHAR<<<\n");
+	printf("\n");
+	controle--;
+	printf("O ultimo elemento foi removido com sucesso!\n");
+	/*for(int i =0; i<controle; i++){
+		printf(" %d ", elemento[i]);
+	}*/
+	system("pause");
+}
+
+void Exibir(){
+	system("cls");
+	int opexibir;
+	do{
+	system("cls");
+	printf("EXIBIR\n");
+	printf("[1] - PILHA VAZIA\n");
+	printf("[2] - PILHA CHEIA\n");
+	printf("[3] - ELEMENTO DO TOPO\n");
+	printf("[4] - MOSTRAR PILHA\n");
+	printf("[0] - VOLTAR\n");
+	printf("Opcao: ");
+	scanf("%d", &opexibir);
+	
+	switch(opexibir){
+		case 1: 
+		system("cls");
+		printf(">>>MENU PILHA VAZIA<<<\n");
+		
+		if(controle<=0){
+		printf("\n");
+		printf("A pilha esta vazia!\n");
+		printf("\n");
+		}
+		else{
+		printf("\n");
+		printf("A pilha NAO esta vazia!\n");
+		printf("\n");
+		}
+		
+		system("pause");
+		break;
+		
+		case 2: 
+		system("cls");
+		printf(">>>MENU PILHA CHEIA<<<\n");
+		if(controle >= 50){
+			printf("\n");
+			printf("A pilha esta cheia!");
+			printf("\n");
+		}
+		else{
+			printf("\n");
+			printf("A pilha NAO esta cheia!");
+			printf("\n");
+		}
+		system("pause");
+		break;
+		
+		case 3: 
+		system("cls");
+		printf(">>>ELEMENTO DO TOPO<<<\n");
+		printf("Topo: %d\n", elemento[controle-1]);
+		system("pause");
+		break;
+		
+		case 4: 
+		system("cls");
+		printf(">>>MOSTRAR PILHA<<<\n");
+		printf("\n");
+		for(int i = 0; i<controle; i++){
+			printf("Elemento %d: %d \n",i, elemento[i]);
+		}
+		printf("\n");
+		system("pause");
+		break;
+		
+		case 0: 
+		system("cls");
+		printf("Voltando...\n");
+		system("pause");
+		break;
+		
+		default:
+		system("cls");
+		printf("Informe uma opcao valida.\n");
+		system("pause");
+		break;
+	}
+		
+	}while(opexibir!=0);
+	
+}
+
+main(){
+	int op;
+	do{
+	system("cls");
+	printf("PILHA\n");
+	printf("[1] - EMPILHAR\n");
+	printf("[2] - DESEMPILHAR\n");
+	printf("[3] - EXIBIR\n");
+	printf("[0] - SAIR\n");
+	printf("Opcao: ");
+	scanf("%d", &op);
+	
+	switch(op){
+		case 1: Empilhar(); break;
+		
+		case 2: Desempilhar(); break;
+		
+		case 3: Exibir(); break;
+		
+		case 0: system("cls"); printf("Bye :)\n"); break;
+		
+		default: system("cls"); printf("Escolha uma opcao valida.\n"); system("pause"); 
+		break;
+	}
+			
+	}while(op!=0);
+}
