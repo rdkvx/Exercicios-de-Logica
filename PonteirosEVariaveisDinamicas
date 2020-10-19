@@ -1,0 +1,356 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+int tmnhVetor = 0, controle = 0;
+int *vetor;
+FILE *arq;
+
+void Alocar(){
+	int opAlocar;
+	system("cls");
+	printf(">>>MENU ALOCAR<<<\n\n");
+	do{
+		
+		if(tmnhVetor == 0){
+			opAlocar = 1;	
+		}
+		else{
+			printf("DESEJA ALTERAR O TAMANHO DO VETOR?: \n");
+			printf("[1] - SIM\n");
+			printf("[0] - NAO\n");
+			printf("OPCAO: ");
+			scanf("%d", &opAlocar);
+		}
+	
+	
+	switch(opAlocar){
+		case 1: 
+		system("cls");
+		printf(">>>MENU ALOCAR<<<\n\n");
+		printf("TOTAL DE NUMEROS A SEREM ARMAZENADOS: ");
+		scanf("%d", &tmnhVetor);
+		vetor = (int*)realloc(vetor, tmnhVetor * sizeof(int));
+		controle = 0;
+		system("cls");
+		printf(">>>MENU ALOCAR<<<\n\n");
+		printf("TAMANHO ATUAL DO VETOR: %d POSICOES\n", tmnhVetor);
+		system("pause");
+		opAlocar = 0;
+		break;
+		
+		default:
+			if(opAlocar == 0){
+				system("cls");
+				printf("Voltando...\n");
+				system("pause");
+			}
+			else{
+				system("cls");
+				printf(">>>MENU ALOCAR<<<\n\n");
+				printf("INFORME UMA OPCAO VALIDA!\n");
+			}
+			break;
+		
+	}	
+	}while(opAlocar!=0);
+	
+}
+
+void Armazenar(){
+	int numerotemp;
+	int opAlocar;
+	bool verificar = false;
+	
+	system("cls");
+	printf(">>>MENU ARMAZENAR<<<\n\n");
+	
+if((controle < tmnhVetor) and (tmnhVetor > 0)){
+		printf("INFORME O VALOR A SER ARMAZENADO: ");
+		scanf("%d", &numerotemp);
+		
+		for(int i = 0; i<tmnhVetor; i++){
+			if(numerotemp==vetor[i]){
+				verificar = true;
+			}
+		}
+			if(verificar==false){
+				vetor[controle] = numerotemp;
+				controle++;
+				system("cls");	
+				printf(">>>MENU ARMAZENAR<<<\n\n");	
+				printf("VALOR ARMAZENADO COM SUCESSO.\n\n");
+				system("pause");			
+				
+			}
+			else{
+				system("cls");
+				printf("O VALOR INFORMADO JA EXISTE!\n\n");
+				system("pause");
+			}
+		}
+	else{
+		printf("VETOR CHEIO OU INEXISTENTE!\nUSE A OPCAO ALOCAR PARA ABRIR MAIS POSICOES!!\n\n");
+		system("pause");
+	}
+}
+
+void Booblesort(){
+	int aux, j, k;
+	
+	for(k = 1; k<tmnhVetor; k++){
+		for(j = 0; j<tmnhVetor-1; j++){
+			if(vetor[j]>vetor[j+1]){
+				aux = vetor[j];
+				vetor[j] = vetor[j+1];
+				vetor[j+1] = aux;
+			}
+		}
+	}
+}
+
+
+void Ordenar(){
+	system("cls");
+	printf(">>>MENU EXIBIR<<<\n");
+	printf("OPCAO ORDERNAR!\n\n");
+	if(tmnhVetor>controle){
+		printf("COMPLETE O VETOR PARA REALIZAR ESSA OPERACAO!\n\n");
+	}
+	else{
+		Booblesort();
+		for(int i =0; i<controle; i++){
+		printf("Posicao[%d]: %d\n", i, vetor[i]);	
+	}
+	}
+	system("pause");
+}
+
+void OrdenarDesc(){
+	system("cls");
+	printf(">>>MENU EXIBIR<<<\n");
+	printf("OPCAO ORDERNAR DECRESCENTE!\n\n");
+	if(tmnhVetor>controle){
+		printf("COMPLETE O VETOR PARA REALIZAR ESSA OPERACAO!\n\n");
+	}
+	else{
+		Booblesort();
+		for(int i=controle; i>0; i--){
+		printf("Posicao[%d]: %d\n", i, vetor[i-1]);
+	}	
+	}
+	
+	system("pause");
+}
+
+void ExibirTodos(){
+	system("cls");
+	printf(">>>MENU EXIBIR<<<\n");
+	printf("OPCAO EXIBIR TODOS!\n\n");
+	
+	for(int i = 0; i < controle; i++){
+		printf("NUMERO NA POSICAO[%d]: %d\n", i, vetor[i]);
+	}
+	system("pause");
+}
+
+void Verificar(){
+	system("cls");
+	printf(">>>MENU EXIBIR<<<\n");
+	printf("OPCAO VERIFICAR!\n\n");
+	
+	int numaux;
+	bool testador = false;
+	
+	printf("Informe o valor: ");
+	scanf("%d", &numaux);
+	
+	for(int i = 0; i < controle; i++){
+		if(numaux == vetor[i]){
+			printf("O VALOR %d INFORMADO ESTA NA POSICAO: [%d]\n", numaux, i);
+			testador = true;			
+		}
+	}
+	if(testador == false){
+	printf("O VALOR NAO FOI ENCONTRADO!\n");
+	}
+
+	system("pause");
+	
+}
+
+void Exibir(){
+			
+		int opExibir;
+		
+		do{
+			system("cls");
+			printf(">>>MENU EXIBIR<<<\n\n");
+			printf("[1] - EXIBIR POR ORDEM CRESCENTE\n");
+			printf("[2] - EXIBIR POR ORDEM DECRESCENTE\n");
+			printf("[3] - EXIBIR DE FORMA DESORDENADA\n");
+			printf("[4] - VERIFICAR SE O NUMERO EXISTE NO VETOR\n");
+			printf("[0] - VOLTAR\n");
+			printf("OPCAO: ");
+			scanf("%d", &opExibir);
+			
+			switch(opExibir){
+				case 1: Ordenar(); break;
+				case 2: OrdenarDesc(); break;
+				case 3: ExibirTodos(); break;
+				case 4: Verificar(); break;
+				default: 
+				if(opExibir == 0){
+				system("cls"); printf("VOLTANDO...\n"); system("pause");	
+				}
+				else{
+				printf("SELECIONE UMA OPCAO VALIDA!\n");system("pause");
+				}
+				break;
+			}
+			
+		}while(opExibir!=0);		
+}
+
+void AlocacaoDinamica(){
+	int opmenuAD;
+	
+	do{
+		system("cls");
+		printf(">>>Alocacao Dinamica<<<\n");
+		printf("[1] - ALOCAR\n");
+		printf("[2] - ARMAZENAR\n");
+		printf("[3] - EXIBIR\n");
+		printf("[0] - VOLTAR\n");
+		printf("OPCAO: ");
+		scanf("%d", &opmenuAD);
+		
+		switch(opmenuAD){
+			case 1: Alocar(); break;
+			case 2: Armazenar(); break;
+			case 3: Exibir(); break;
+			case 0: system("cls"); printf("VOLTANDO...\n"); system("pause"); break;
+			default: printf("INFORME UMA OPCAO VALIDA!\n"); break;		
+		}
+	
+		
+	}while(opmenuAD!=0);
+	
+}
+
+void Salvar(){
+	bool save = false;
+	if((arq=fopen("VETOR.txt", "w")) != NULL){
+		for(int i=0; i<controle; i++){
+			fprintf(arq,"VETOR POSICAO: [%d] VALOR: [%d] \n", i, vetor[i]);
+			save = true;
+		}
+	}
+	else{
+		printf("ERRO AO SALVAR! VERIFIQUE AS PERMISSOES DA PASTA! \n");
+	}
+	if(save){
+		system("cls");
+		printf("ARQUIVO SALVO COM SUCESSO!\n");
+		system("pause");
+	}
+	fclose(arq);
+}
+
+void Carregar(){
+	bool load = false;
+	if((arq=fopen("VETOR.txt", "r")) != NULL){
+		//if()
+		for(int i=0; i<tmnhVetor; i++){
+			
+			if(i == 0){
+				fseek(arq,7,0);
+			}
+			else{
+				fseek(arq,7,1);
+			}
+			
+			fscanf(arq,"%d\n", &vetor[i]);
+			
+			printf("VETOR NA POSICAO %d: [%d]\n", i, vetor[i]);
+			load = true;
+			system("pause");
+		}
+		if(load){
+			system("cls");
+			printf("ARQUIVO CARREGADO COM SUCESSO!\n");
+			system("pause");
+		}
+	}
+	else{
+		system("cls");
+		printf("ERRO AO CARREGAR ARQUIVO. \nVERIFIQUE SE O ARQUIVO ESTA NA PASTA CORRETA!");
+		system("pause");
+	}	
+	fclose(arq);
+	
+}
+
+void SalvarEmArquivo(){
+	int opSEA;
+	
+	do{
+		system("cls");
+		printf(">>>SALVAR EM ARQUIVO<<<\n");
+		printf("[1] - SALVAR\n");
+		printf("[2] - CARREGAR\n");
+		printf("[0] - VOLTAR\n");
+		printf("OPCAO: ");
+		scanf("%d", &opSEA);
+		
+		switch(opSEA){
+			case 1: Salvar();break;
+			case 2: Carregar();break;
+			default: 
+				if(opSEA == 0){
+				system("cls"); printf("VOLTANDO...\n"); system("pause");
+			}
+			else{
+				system("cls"); printf("INFORME UMA OPCAO VALIDA!\n"); system("pause");
+			}
+		}
+		
+		
+	}while(opSEA!=0);
+}
+
+main(){
+	
+	int opmenuprincipal;
+	do{
+		system("cls");
+		printf("ALOCACAO DINAMICA E PONTEIROS\n");
+		printf("[1] - ALOCACAO DINAMICA\n");
+		printf("[2] - SALVAR DADOS EM ARQUIVO\n");
+		printf("[0] - SAIR\n");
+		printf("OPCAO: ");
+		scanf("%d", &opmenuprincipal);
+		
+		switch(opmenuprincipal){
+			case 1: AlocacaoDinamica();
+			break;
+			case 2: SalvarEmArquivo();
+			break;			
+			default: 
+			if(opmenuprincipal == 0){
+			printf("\n Bye Bye :)\n\n");
+			//printf("{|__|} \n" );
+			printf("(='_')\n");
+			printf("(, (");
+			printf("'')('')\n");
+			
+			
+			}
+			else{				
+			system("cls"); printf("ESCOLHA UMA OPCAO VALIDA!\n"); system("pause");
+			}
+			break;
+		}
+	}while(opmenuprincipal!=0);
+	
+	
+}
