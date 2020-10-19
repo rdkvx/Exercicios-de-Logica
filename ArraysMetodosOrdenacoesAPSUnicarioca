@@ -1,0 +1,452 @@
+Algoritmo "APS"
+//ALUNOS: Rodrigo de Lima Soares / 2019200215
+//        Ezequiel Nascimento Campos / 2019100701
+//        Renato Wagner Rolim Pereira / 2011200499
+//
+
+//>>>>>>>>>>>PROCEDIMENTO PARA CADASTRAR INFORMAÇÕES<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+procedimento adicionar()
+var
+verify, cont, j : inteiro
+ver: logico
+//CONFIRMAÇAO NA TELA
+x: caracter
+inicio
+limpatela
+escreval()
+escreval("UNICARIOCA – PROGRAMA RG")
+escreval("ADICIONAR ELEMENTO")
+escreval()
+//VERIFICA SE TEM ESPACO NO VETOR!!
+se (i <= 100) entao
+   escreva("Informe o RG: ")
+   //VARIAVEL TEMPORARIA!!
+   leia(verify)
+   para cont de 1 ate i faca
+      //VERIFICA SE O RG JA FOI CADASTRADO ANTES!!
+      se(verify = RG[cont]) entao
+         ver <- verdadeiro
+      fimse
+   fimpara
+   //CASO O RG NAO TENHA SIDO CADASTRADO ANTES,
+   se(ver = falso) entao
+      //JOGA O RG DA VARIAVEL TEMPORARIA PARA A DEFINITIVA.
+      rg[i]<- verify
+      escreval("RG[",i,"]")
+      leia(x)
+      limpatela
+      ordenacao <- falso
+      i<- i + 1
+   senao
+      escreval(">>>>>>>!!RG JA EXISTE!!<<<<<<<<<<")
+      leia(x)
+      limpatela
+
+   fimse
+
+senao
+   escreval("Banco cheio!")
+   escreval("Não é possivel adicionar mais RGs.")
+   escreval("Para continuar usando o sistema, apague todos os dados!")
+   escreva()
+fimse
+fimprocedimento
+
+//>>>>>>>PROCEDIMENTO PARA PESQUISAR AS INFORMAÇÕES<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+procedimento pesquisar(cont : inteiro)
+var
+opcao_pesquisar : inteiro
+//CONFIRMAÇAO NA TELA
+x : caracter
+
+inicial, final, meio : inteiro
+//verifica se encontrou o RG ou nao.
+dado_encontrado: logico
+
+inicio
+
+opcao_pesquisar <- 1
+limpatela
+//Forca que digite os valores disponiveis nas opcoes.
+enquanto opcao_pesquisar > 0 faca
+
+   escreval("UNICARIOCA – PROGRAMA RG")
+   escreval("PESQUISA ELEMENTO")
+   escreval("")
+   escreval("[1] - Pesquisa Sequencial")
+   escreval("[2] - Pesquisa Binaria")
+   escreval("[0] - Voltar")
+   escreva("Opcao: ")
+   leia(opcao_pesquisar)
+   limpatela
+
+   escolha opcao_pesquisar
+      //PESQUISA SEQUENCIAL
+   caso 1
+
+      limpatela
+      escreval("UNICARIOCA – PROGRAMA RG")
+      escreval(">>>Pesquisa Sequencial<<<")
+      escreval()
+      escreva("Informe o RG: ")
+      leia(busca)
+      //CORRE O VETOR FAZENDO A BUSCA DE FORMA
+      para i de 1 ate cont faca
+         //SEQUENCIAL
+         se(busca = rg[i]) entao
+            escreval("O RG: ", busca, " esta no vetor: ", i)
+            leia(x)
+            limpatela
+         fimse
+      fimpara
+
+      //PESQUISA BINÁRIA
+   caso 2
+      limpatela
+      escreval("UNICARIOCA – PROGRAMA RG")
+      escreval(">>>Pesquisa Binaria<<<")
+      escreval()
+
+      //VERIFICA SE O VETOR ESTÁ ORDENADO
+      se(ordenacao = verdadeiro)entao
+         escreva("Informe o RG: ")
+         leia(busca)
+
+         inicial <- 1
+         final <- cont
+         dado_encontrado <- falso
+
+         //verifica o tamanho do vetor e se o dado não foi encontrado.
+         enquanto (inicial <= final) e (dado_encontrado = falso) faca
+            meio <- (inicial+final)\2
+
+            //se cair aqui, e porque o resultado foi encontrado.
+            se(RG[meio] = busca)entao
+               dado_encontrado <- verdadeiro
+            fimse
+            //se o valor digitado for MENOR que o valor dentro do vetor
+            //na posição atual, o mesmo é decrementado até não restar
+            //mais posições a esquerda.
+            //se for MAIOR, ele é incrementado, até não restar mais
+            //posições a direita.
+            se(RG[meio] > busca)entao
+               final <- meio-1
+            senao
+               inicial <- meio+1
+            fimse
+         fimenquanto
+
+         se(dado_encontrado = verdadeiro) entao
+            escreva("O RG: ", RG[meio])
+            escreva(" foi encontrado no vetor: ", meio)
+         senao
+            escreva("RG não encontrado.")
+         fimse
+
+      senao
+         //CASO NÃO ESTEJA
+         escreval("ORDENE O VETOR!!!!")
+         //ORDENADO, SOLICITA PARA ORDENAR
+      fimse
+      escreval()
+      leia(x)
+      limpatela
+   fimescolha
+fimenquanto
+
+fimprocedimento
+
+
+//>>>>>>>>PROCEDIMENTO PARA ZERAR OS DADOS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+procedimento apagar()
+var
+k, j : inteiro
+confirmacao,opcao, busca : inteiro
+
+//CONFIRMAÇAO NA TELA
+x: caracter
+inicio
+confirmacao <- 1
+opcao <- 1
+
+enquanto opcao > 0 faca
+
+   limpatela
+   escreval("UNICARIOCA – PROGRAMA RG")
+   escreval("REMOVER RG")
+   escreval("")
+   escreval("[1] - Remover 1 RG")
+   escreval("[2] - Remover TODOS")
+   escreval("[0] - Voltar")
+   escreva("Opcao: ")
+   leia(opcao)
+
+   escolha opcao
+
+   caso 1
+      limpatela
+      escreval("UNICARIOCA – PROGRAMA RG")
+      escreval("REMOVER RG")
+      escreval()
+      escreva("Informe o RG: ")
+      leia(busca)
+
+      //CORRE O VETOR FAZENDO A BUSCA DE FORMA SEQUENCIAL
+      para j de 1 ate i-1 faca
+         se(busca = rg[j]) entao
+            rg[j] <- 0
+            ordenacao <- falso
+            escreva("RG Deletado com sucesso!")
+            leia(x)
+            limpatela
+         fimse
+      fimpara
+
+      limpatela
+   caso 2
+
+      limpatela
+      escreval("!!!>>>A T E N Ç Ã O<<<!!!")
+      escreval("")
+      escreva("Todos os registros serão apagados, ")
+      escreval("deseja continuar? ")
+      escreval("[1] - Sim, quero que tudo seja deletado!")
+      escreval("[0] - Não, me tire daqui!!!")
+      escreva("Opcao: ")
+      //CONFIRMAÇÃO ANTES DE DELETAR OS DADOS.
+      leia(opcao)
+
+      se(opcao = 1)entao
+         para k de 1 ate i faca
+            RG[i] <-  0
+         fimpara
+         limpatela
+         i <- 1
+         escreva("Registros apagados com sucesso!")
+         leia(x)
+         limpatela
+      fimse
+   fimescolha
+fimenquanto
+fimprocedimento
+
+//>>>METODO DE ORDENAÇÃO QUICKSORT<<<
+procedimento QuickSort(min, max: inteiro)
+var
+h, j, t,pivo, aux : inteiro
+inicio
+h <- min
+j <- max
+
+pivo <- RG[(min + max) div 2]
+enquanto (h < j) faca
+   enquanto (RG[h] < pivo) faca
+      h <- h + 1
+   fimEnquanto
+   enquanto (RG[j] > pivo) faca
+      j <- j - 1
+   fimEnquanto
+   se (h <= j) entao
+      aux <- RG[h]
+      RG[h] <- RG[j]
+      RG[j] <- aux
+      h <- h + 1
+      j <- j - 1
+   fimSe
+fimEnquanto
+se (j > min) entao
+   QuickSort(min, j)
+fimSe
+se (h < max) entao
+   QuickSort(h, max)
+fimse
+
+fimprocedimento
+
+
+//>>>>>>>>PROCEDIMENTO DE ORDENCAÇÃO<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+procedimento Ordernar(n : inteiro)
+var
+opcao_ordenacao : inteiro
+//CONFIRMAÇAO NA TELA
+x: caracter
+i, j, aux, min, max, chave: inteiro
+
+inicio
+opcao_ordenacao <- 1
+
+enquanto opcao_ordenacao > 0 faca
+   limpatela
+   escreval("UNICARIOCA – PROGRAMA RG")
+   escreval("ORDENAR VETOR")
+   escreval("")
+   escreval("[1] - Método BubbleSort")
+   escreval("[2] - Método QuickSort")
+   escreval("[3] - Método SelectionSort")
+   escreval("[4] - Método InsertionSort")
+   escreval("[0] - Voltar!")
+   escreva("Opcao: ")
+   leia(opcao_ordenacao)
+
+   se(ordenacao = verdadeiro)entao
+      se(opcao_ordenacao = 0)entao
+         limpatela
+      senao
+         limpatela
+         escreva("O vetor ja esta ordenado!")
+         leia(x)
+         limpatela
+
+      fimse
+
+   senao
+      escolha opcao_ordenacao
+
+      caso 1
+         limpatela
+         escreval(">>>>Método Bubblesort<<<<")
+
+         n <- n -1
+         para j de n ate 1 passo -1 faca
+            para i de 1 ate j-1 faca
+               se(RG[i] > RG[i+1])entao
+                  aux <- RG[i]
+                  RG[i] <- RG[i+1]
+                  RG[i+1] <- aux
+               fimse
+            fimpara
+         fimpara
+         ordenacao <- verdadeiro
+          n <- n + 1
+         escreva("Ordenação Bubblesort Concluida com Sucesso!")
+         leia(x)
+         limpatela
+
+      caso 2
+         limpatela
+         escreval(">>>>Método Quicksort<<<<")
+         min <- 1
+         max <- n-1
+         QuickSort(min, max)
+         ordenacao <- verdadeiro
+         
+         escreva("Ordenação Quicksort Concluida com Sucesso!")
+         leia(x)
+         limpatela
+
+      caso 3
+         limpatela
+         escreval(">>>>Método Selection Sort<<<<")
+
+
+         para i de 1 ate n-1 faca
+            min <- i
+            para j de i + 1 ate n-1 faca
+               se RG[j] < RG[min] entao
+                  min <- j
+               fimse
+               se min <> i entao
+                  aux <- RG[i]
+                  RG[i] <- RG[min]
+                  RG[min] <- aux
+               fimse
+            fimpara
+         fimpara
+         ordenacao <- verdadeiro
+         
+         escreva("Ordenação Selection Sort Concluida com Sucesso!")
+         leia(x)
+         limpatela
+
+      caso 4
+         limpatela
+         escreval(">>>>Método Insertion Sort<<<<")
+
+         //         para i de 1 ate n-1 faca
+         //          escreval("Desordenado: ", RG[i])
+         //     fimpara
+         //   leia(x)
+
+
+         para j de 2 ate n-1 faca
+            chave <- RG[j]
+            i <- j-1
+            enquanto ((i>0)e(RG[i]>chave)) faca
+               RG[i+1] <- RG[i]
+               i <- i-1
+            fimenquanto
+            RG[i+1] <- chave
+         fimpara
+
+         //para i de 1 ate n faca
+         // escreval("Ordenado: ", RG[i])
+         //         fimpara
+
+         ordenacao <- verdadeiro
+         
+         escreva("Ordenação Insertion Sort Concluída com Sucesso.")
+         leia(x)
+         limpatela
+
+
+      fimescolha
+   fimse
+fimenquanto
+limpatela
+
+
+fimprocedimento
+
+//>>>>>>>>>INICIO DO PROGRAMA!!!!!!!!!!!!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Var
+
+RG : vetor[0..100] de inteiro
+i, opcao,busca, min, max : inteiro
+x: caracter
+ordenacao : logico
+Inicio
+opcao <- 1
+i <- 1
+ordenacao <- falso
+
+
+enquanto (opcao >0) faca
+   limpatela
+   escreval()
+   escreval("UNICARIOCA - PROGRAMA RG")
+   escreval("[1] - Adicionar")
+   escreval("[2] - Pesquisar")
+   escreval("[3] - Ordernar")
+   escreval("[4] - Remover")
+   escreval("[0] - Sair")
+   escreva("Opcao: ")
+   leia(opcao)
+
+   escolha opcao
+   caso 1
+      adicionar()
+
+
+
+   caso 2
+      pesquisar(i)
+
+
+
+   caso 3
+      Ordernar(i)
+
+
+   caso 4
+      apagar()
+
+   caso 0
+      escreval("")
+      escreval("Até Logo.")
+      escreval(" /\_/\")
+      escreval("(='_' )")
+      escreva("(, (")
+      escreva("'')('')")
+   fimescolha
+fimenquanto
+Fimalgoritmo
