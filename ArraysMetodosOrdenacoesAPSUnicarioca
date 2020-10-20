@@ -1,9 +1,3 @@
-Algoritmo "APS"
-//ALUNOS: Rodrigo de Lima Soares / 2019200215
-//        Ezequiel Nascimento Campos / 2019100701
-//        Renato Wagner Rolim Pereira / 2011200499
-//
-
 //>>>>>>>>>>>PROCEDIMENTO PARA CADASTRAR INFORMAÇÕES<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 procedimento adicionar()
 var
