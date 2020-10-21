@@ -29,6 +29,9 @@ void Alocar(){
 		printf(">>>MENU ALOCAR<<<\n\n");
 		printf("TOTAL DE NUMEROS A SEREM ARMAZENADOS: ");
 		scanf("%d", &tmnhVetor);
+		//O comando realloc nada mais e do que a juncao dos comandos
+		//free e em seguida um mallock, entao nao tem problema
+		//usar direto.
 		vetor = (int*)realloc(vetor, tmnhVetor * sizeof(int));
 		controle = 0;
 		system("cls");
