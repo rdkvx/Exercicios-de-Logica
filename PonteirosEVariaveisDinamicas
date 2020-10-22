@@ -29,23 +29,18 @@ void Alocar(){
 		printf(">>>MENU ALOCAR<<<\n\n");
 		printf("TOTAL DE NUMEROS A SEREM ARMAZENADOS: ");
 		scanf("%d", &tmnhVetor);
-		//O comando realloc nada mais e do que a juncao dos comandos
-		//free e em seguida um mallock, entao nao tem problema
-		//usar direto.
 		vetor = (int*)realloc(vetor, tmnhVetor * sizeof(int));
 		controle = 0;
 		system("cls");
 		printf(">>>MENU ALOCAR<<<\n\n");
-		printf("TAMANHO ATUAL DO VETOR: %d POSICOES\n", tmnhVetor);
+		printf("TAMANHO ATUAL DO VETOR: %d POSICOES\n\n", tmnhVetor);
 		system("pause");
 		opAlocar = 0;
 		break;
 		
 		default:
 			if(opAlocar == 0){
-				system("cls");
-				printf("Voltando...\n");
-				system("pause");
+				
 			}
 			else{
 				system("cls");
@@ -174,7 +169,7 @@ void Verificar(){
 		}
 	}
 	if(testador == false){
-	printf("O VALOR NAO FOI ENCONTRADO!\n");
+	printf("O VALOR NAO FOI ENCONTRADO!\n\n");
 	}
 
 	system("pause");
@@ -201,14 +196,9 @@ void Exibir(){
 				case 2: OrdenarDesc(); break;
 				case 3: ExibirTodos(); break;
 				case 4: Verificar(); break;
-				default: 
-				if(opExibir == 0){
-				system("cls"); printf("VOLTANDO...\n"); system("pause");	
-				}
-				else{
-				printf("SELECIONE UMA OPCAO VALIDA!\n");system("pause");
-				}
-				break;
+				case 0: break;
+				default: printf("SELECIONE UMA OPCAO VALIDA!\n\n");system("pause");break;
+				
 			}
 			
 		}while(opExibir!=0);		
@@ -231,8 +221,8 @@ void AlocacaoDinamica(){
 			case 1: Alocar(); break;
 			case 2: Armazenar(); break;
 			case 3: Exibir(); break;
-			case 0: system("cls"); printf("VOLTANDO...\n"); system("pause"); break;
-			default: printf("INFORME UMA OPCAO VALIDA!\n"); break;		
+			case 0: break;
+			default: printf("INFORME UMA OPCAO VALIDA!\n\n"); system("pause"); break;		
 		}
 	
 		
@@ -244,16 +234,17 @@ void Salvar(){
 	bool save = false;
 	if((arq=fopen("VETOR.txt", "w")) != NULL){
 		for(int i=0; i<controle; i++){
-			fprintf(arq,"VETOR POSICAO: [%d] VALOR: [%d] \n", i, vetor[i]);
+			fprintf(arq,"VETOR POSICAO: [%d] VALOR: %d\n", i, vetor[i]);
 			save = true;
 		}
 	}
 	else{
-		printf("ERRO AO SALVAR! VERIFIQUE AS PERMISSOES DA PASTA! \n");
+		printf("ERRO AO SALVAR! VERIFIQUE AS PERMISSOES DA PASTA! \n\n");
+		system("pause");
 	}
 	if(save){
 		system("cls");
-		printf("ARQUIVO SALVO COM SUCESSO!\n");
+		printf("ARQUIVO SALVO COM SUCESSO!\n\n");
 		system("pause");
 	}
 	fclose(arq);
@@ -266,16 +257,16 @@ void Carregar(){
 		for(int i=0; i<tmnhVetor; i++){
 			
 			if(i == 0){
-				fseek(arq,7,0);
+				fseek(arq,26,0);
 			}
 			else{
-				fseek(arq,7,1);
+				fseek(arq,26,1);
 			}
-			
 			fscanf(arq,"%d\n", &vetor[i]);
 			
-			printf("VETOR NA POSICAO %d: [%d]\n", i, vetor[i]);
+			printf("VETOR NA POSICAO [%d]: %d\n", i, vetor[i]);
 			load = true;
+			controle++;
 			system("pause");
 		}
 		if(load){
@@ -283,10 +274,17 @@ void Carregar(){
 			printf("ARQUIVO CARREGADO COM SUCESSO!\n");
 			system("pause");
 		}
+		else{
+		system("cls");
+		printf(">>>>>ERRO AO CARREGAR ARQUIVO<<<<< \n\nVERIFIQUE SE O ARQUIVO ESTA NA PASTA CORRETA\n");
+		printf("E SE O VETOR FOI CRIADO!\n\n");
+		system("pause");
+		}
 	}
 	else{
 		system("cls");
-		printf("ERRO AO CARREGAR ARQUIVO. \nVERIFIQUE SE O ARQUIVO ESTA NA PASTA CORRETA!");
+		printf(">>>>>ERRO AO CARREGAR ARQUIVO<<<<< \n\nVERIFIQUE SE O ARQUIVO ESTA NA PASTA CORRETA\n");
+		printf("E SE O VETOR FOI CRIADO!\n\n");
 		system("pause");
 	}	
 	fclose(arq);
@@ -308,16 +306,9 @@ void SalvarEmArquivo(){
 		switch(opSEA){
 			case 1: Salvar();break;
 			case 2: Carregar();break;
-			default: 
-				if(opSEA == 0){
-				system("cls"); printf("VOLTANDO...\n"); system("pause");
+			case 0: break;
+			default: system("cls"); printf("INFORME UMA OPCAO VALIDA!\n"); system("pause");
 			}
-			else{
-				system("cls"); printf("INFORME UMA OPCAO VALIDA!\n"); system("pause");
-			}
-		}
-		
-		
 	}while(opSEA!=0);
 }
 
@@ -349,7 +340,7 @@ main(){
 			
 			}
 			else{				
-			system("cls"); printf("ESCOLHA UMA OPCAO VALIDA!\n"); system("pause");
+			system("cls"); printf("ESCOLHA UMA OPCAO VALIDA!\n\n"); system("pause");
 			}
 			break;
 		}
