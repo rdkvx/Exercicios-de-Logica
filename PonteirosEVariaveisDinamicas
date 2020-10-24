@@ -8,7 +8,7 @@ FILE *arq;
 void Alocar(){
 	int opAlocar;
 	system("cls");
-	printf(">>>MENU ALOCAR<<<\n\n");
+	printf(">>>MENU CRIAR VETOR<<<\n\n");
 	do{
 		
 		if(tmnhVetor == 0){
@@ -26,13 +26,13 @@ void Alocar(){
 	switch(opAlocar){
 		case 1: 
 		system("cls");
-		printf(">>>MENU ALOCAR<<<\n\n");
+		printf(">>>MENU CRIAR VETOR<<\n\n");
 		printf("TOTAL DE NUMEROS A SEREM ARMAZENADOS: ");
 		scanf("%d", &tmnhVetor);
 		vetor = (int*)realloc(vetor, tmnhVetor * sizeof(int));
 		controle = 0;
 		system("cls");
-		printf(">>>MENU ALOCAR<<<\n\n");
+		printf(">>>MENU CRIAR VETOR<<<\n\n");
 		printf("TAMANHO ATUAL DO VETOR: %d POSICOES\n\n", tmnhVetor);
 		system("pause");
 		opAlocar = 0;
@@ -44,7 +44,7 @@ void Alocar(){
 			}
 			else{
 				system("cls");
-				printf(">>>MENU ALOCAR<<<\n\n");
+				printf(">>>MENU CRIAR VETOR<<<\n\n");
 				printf("INFORME UMA OPCAO VALIDA!\n");
 			}
 			break;
@@ -60,10 +60,10 @@ void Armazenar(){
 	bool verificar = false;
 	
 	system("cls");
-	printf(">>>MENU ARMAZENAR<<<\n\n");
+	printf(">>>MENU INSERIR<<<\n\n");
 	
 if((controle < tmnhVetor) and (tmnhVetor > 0)){
-		printf("INFORME O VALOR A SER ARMAZENADO: ");
+		printf("INFORME O VALOR A SER INSERIDO: ");
 		scanf("%d", &numerotemp);
 		
 		for(int i = 0; i<tmnhVetor; i++){
@@ -75,8 +75,8 @@ if((controle < tmnhVetor) and (tmnhVetor > 0)){
 				vetor[controle] = numerotemp;
 				controle++;
 				system("cls");	
-				printf(">>>MENU ARMAZENAR<<<\n\n");	
-				printf("VALOR ARMAZENADO COM SUCESSO.\n\n");
+				printf(">>>MENU INSERIR<<<\n\n");	
+				printf("VALOR INSERIDO COM SUCESSO.\n\n");
 				system("pause");			
 				
 			}
@@ -87,7 +87,7 @@ if((controle < tmnhVetor) and (tmnhVetor > 0)){
 			}
 		}
 	else{
-		printf("VETOR CHEIO OU INEXISTENTE!\nUSE A OPCAO ALOCAR PARA ABRIR MAIS POSICOES!!\n\n");
+		printf("VETOR CHEIO OU INEXISTENTE!\nUSE A OPCAO 'CRIAR VETOR' PARA ABRIR MAIS POSICOES!!\n\n");
 		system("pause");
 	}
 }
@@ -209,9 +209,9 @@ void AlocacaoDinamica(){
 	
 	do{
 		system("cls");
-		printf(">>>Alocacao Dinamica<<<\n");
-		printf("[1] - ALOCAR\n");
-		printf("[2] - ARMAZENAR\n");
+		printf(">>>MANIPULACAO DO VETOR<<<\n");
+		printf("[1] - CRIAR VETOR\n");
+		printf("[2] - INSERIR DADOS NO VETOR\n");
 		printf("[3] - EXIBIR\n");
 		printf("[0] - VOLTAR\n");
 		printf("OPCAO: ");
@@ -239,12 +239,12 @@ void Salvar(){
 		}
 	}
 	else{
-		printf("ERRO AO SALVAR! VERIFIQUE AS PERMISSOES DA PASTA! \n\n");
+		printf("ERRO AO EXPORTAR ARQUIVO! VERIFIQUE AS PERMISSOES DA PASTA! \n\n");
 		system("pause");
 	}
 	if(save){
 		system("cls");
-		printf("ARQUIVO SALVO COM SUCESSO!\n\n");
+		printf("ARQUIVO EXPORTADO COM SUCESSO!\n\n");
 		system("pause");
 	}
 	fclose(arq);
@@ -271,19 +271,19 @@ void Carregar(){
 		}
 		if(load){
 			system("cls");
-			printf("ARQUIVO CARREGADO COM SUCESSO!\n");
+			printf("ARQUIVO IMPORTADO COM SUCESSO!\n");
 			system("pause");
 		}
 		else{
 		system("cls");
-		printf(">>>>>ERRO AO CARREGAR ARQUIVO<<<<< \n\nVERIFIQUE SE O ARQUIVO ESTA NA PASTA CORRETA\n");
+		printf(">>>>>ERRO AO IMPORTAR ARQUIVO<<<<< \n\nVERIFIQUE SE O ARQUIVO ESTA NA PASTA CORRETA\n");
 		printf("E SE O VETOR FOI CRIADO!\n\n");
 		system("pause");
 		}
 	}
 	else{
 		system("cls");
-		printf(">>>>>ERRO AO CARREGAR ARQUIVO<<<<< \n\nVERIFIQUE SE O ARQUIVO ESTA NA PASTA CORRETA\n");
+		printf(">>>>>ERRO AO IMPORTAR ARQUIVO<<<<< \n\nVERIFIQUE SE O ARQUIVO ESTA NA PASTA CORRETA\n");
 		printf("E SE O VETOR FOI CRIADO!\n\n");
 		system("pause");
 	}	
@@ -296,9 +296,9 @@ void SalvarEmArquivo(){
 	
 	do{
 		system("cls");
-		printf(">>>SALVAR EM ARQUIVO<<<\n");
-		printf("[1] - SALVAR\n");
-		printf("[2] - CARREGAR\n");
+		printf(">>>MANIPULACAO EM ARQUIVO<<<\n");
+		printf("[1] - EXPORTAR\n");
+		printf("[2] - IMPORTAR\n");
 		printf("[0] - VOLTAR\n");
 		printf("OPCAO: ");
 		scanf("%d", &opSEA);
@@ -318,8 +318,8 @@ main(){
 	do{
 		system("cls");
 		printf("ALOCACAO DINAMICA E PONTEIROS\n");
-		printf("[1] - ALOCACAO DINAMICA\n");
-		printf("[2] - SALVAR DADOS EM ARQUIVO\n");
+		printf("[1] - MANIPULAR VETOR\n");
+		printf("[2] - IMPORTAR E EXPORTAR DADOS DO VETOR\n");
 		printf("[0] - SAIR\n");
 		printf("OPCAO: ");
 		scanf("%d", &opmenuprincipal);
